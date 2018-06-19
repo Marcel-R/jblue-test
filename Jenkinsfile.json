@@ -8,7 +8,7 @@
     "hostname": "test.localhost"
   },
   "container_repo": {
-    "host": "kube-registry.kube-system.svc.cluster.local:5000",
+    "host": "kube-registry.kube-system.svc.cluster.local:31000",
     "proto": "http",
     "master_acct": "test",
     "alt_acct": "test",
