@@ -8,7 +8,7 @@ servicePort: 80
 containerPort: 8080
 component: "jblue-test"
 replicas: 2
-image: "10.233.57.255:5000/test/jblue-test"
+image: "docker-registry-docker-registry:5000/test/jblue-test"
 imageTag: "latest"
 imagePullPolicy: "Always"
 ## If you have a private registry you specify a secret to use
@@ -18,9 +18,9 @@ memory: "128Mi"
 ## Ingress settings
 ingress:
   enabled: true
-  hostname: test.eqap.io
+  hostname: test.localhost
   annotations:
-     kubernetes.io/ingress.class: traefik
+     kubernetes.io/ingress.class: nginx
      kubernetes.io/tls-acme: "true"
   tls: true
 ## PodDisruptionBudget
