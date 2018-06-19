@@ -8,7 +8,7 @@ servicePort: 80
 containerPort: 8080
 component: "jblue-test"
 replicas: 2
-image: "kube-registry.kube-system.svc.cluster.local:5000/test/jblue-test"
+image: "kube-registry.kube-system.svc.cluster.local:31000/test/jblue-test"
 imageTag: "latest"
 imagePullPolicy: "Always"
 ## If you have a private registry you specify a secret to use
