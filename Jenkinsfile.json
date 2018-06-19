@@ -5,10 +5,10 @@
     "cpu": "10m",
     "memory": "128Mi",
     "test": true,
-    "hostname": "test.eqap.io"
+    "hostname": "test.localhost"
   },
   "container_repo": {
-    "host": "10.233.57.255:5000",
+    "host": "docker-registry-docker-registry:5000",
     "proto": "http",
     "master_acct": "test",
     "alt_acct": "test",
