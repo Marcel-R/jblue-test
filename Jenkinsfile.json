@@ -8,7 +8,7 @@
     "hostname": "test.localhost"
   },
   "container_repo": {
-    "host": "10.110.191.161:5000",
+    "host": "http://10.110.191.161:5000",
     "proto": "http",
     "master_acct": "test",
     "alt_acct": "test",
