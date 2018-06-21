@@ -119,6 +119,62 @@ volumes:[
       }
     }
 
+    if (env.BRANCH_NAME == 'acceptance') {
+      stage ('deploy to k8s') {
+        container('helm') {
+          // Deploy using Helm chart
+          pipeline.helmDeploy(
+            dry_run       : false,
+            name          : env.BRANCH_NAME.toLowerCase(),
+            namespace     : env.BRANCH_NAME.toLowerCase(),
+            chart_dir     : chart_dir,
+            set           : [
+              "imageTag": image_tags_list.get(0),
+              "replicas": config.app.replicas,
+              "cpu": config.app.cpu,
+              "memory": config.app.memory,
+              "ingress.hostname": "acceptance." + config.app.hostname,
+            ]
+          )
+
+          //  Run helm tests
+          if (config.app.test) {
+            pipeline.helmTest(
+              name        : env.BRANCH_NAME.toLowerCase()
+            )
+          }
+        }
+      }
+    }
+
+    if (env.BRANCH_NAME == 'develop') {
+      stage ('deploy to k8s') {
+        container('helm') {
+          // Deploy using Helm chart
+          pipeline.helmDeploy(
+            dry_run       : false,
+            name          : env.BRANCH_NAME.toLowerCase(),
+            namespace     : env.BRANCH_NAME.toLowerCase(),
+            chart_dir     : chart_dir,
+            set           : [
+              "imageTag": image_tags_list.get(0),
+              "replicas": config.app.replicas,
+              "cpu": config.app.cpu,
+              "memory": config.app.memory,
+              "ingress.hostname": "dev." + config.app.hostname,
+            ]
+          )
+
+          //  Run helm tests
+          if (config.app.test) {
+            pipeline.helmTest(
+              name        : env.BRANCH_NAME.toLowerCase()
+            )
+          }
+        }
+      }
+    }
+
     // deploy only the master branch
     if (env.BRANCH_NAME == 'master') {
       stage ('deploy to k8s') {
@@ -143,35 +199,6 @@ volumes:[
           if (config.app.test) {
             pipeline.helmTest(
               name          : config.app.name
-            )
-          }
-        }
-      }
-    }
-
-
-    if (env.BRANCH_NAME == 'acceptance') {
-      stage ('deploy to k8s') {
-        container('helm') {
-          // Deploy using Helm chart
-          pipeline.helmDeploy(
-            dry_run       : false,
-            name          : env.BRANCH_NAME.toLowerCase(),
-            namespace     : env.BRANCH_NAME.toLowerCase(),
-            chart_dir     : chart_dir,
-            set           : [
-              "imageTag": image_tags_list.get(0),
-              "replicas": config.app.replicas,
-              "cpu": config.app.cpu,
-              "memory": config.app.memory,
-              "ingress.hostname": "acceptance." + config.app.hostname,
-            ]
-          )
-
-          //  Run helm tests
-          if (config.app.test) {
-            pipeline.helmTest(
-              name        : env.BRANCH_NAME.toLowerCase()
             )
           }
         }
