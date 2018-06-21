@@ -18,6 +18,7 @@ volumes:[
 ]){
 
   node ('jenkins-pipeline') {
+    properties([disableConcurrentBuilds()])
     def pwd = pwd()
 
     checkout scm
