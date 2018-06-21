@@ -133,7 +133,7 @@ volumes:[
               "replicas": config.app.replicas,
               "cpu": config.app.cpu,
               "memory": config.app.memory,
-              "ingress.hostname": config.app.hostname,
+              "ingress.hostname": "acceptance." + config.app.hostname,
             ]
           )
 
@@ -143,11 +143,6 @@ volumes:[
               name        : env.BRANCH_NAME.toLowerCase()
             )
           }
-
-          // delete test deployment
-          pipeline.helmDelete(
-              name       : env.BRANCH_NAME.toLowerCase()
-          )
         }
       }
     }
