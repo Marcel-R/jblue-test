@@ -38,6 +38,15 @@ volumes:[
     // set additional git envvars for image tagging
     pipeline.gitEnvVars()
 
+    switch (true) {
+      case env.BRANCH_NAME =~ "PR-*":
+      case env.BRANCH_NAME == "master":
+      case env.BRANCH_NAME == "develop":
+      case env.BRANCH_NAME == "acceptance":
+        break
+      default:
+        return
+
     // If pipeline debugging enabled
     if (config.pipeline.debug) {
       println "DEBUG ENABLED"
