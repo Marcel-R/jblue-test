@@ -18,7 +18,6 @@ volumes:[
 ]){
 
   node ('jenkins-pipeline') {
-
     def pwd = pwd()
 
     checkout scm
@@ -46,6 +45,7 @@ volumes:[
         break
       default:
         return
+    }
 
     // If pipeline debugging enabled
     if (config.pipeline.debug) {
