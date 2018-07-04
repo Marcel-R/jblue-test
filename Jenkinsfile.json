@@ -5,7 +5,7 @@
     "cpu": "10m",
     "memory": "128Mi",
     "test": true,
-    "hostname": "test.localhost"
+    "hostname": "test.opsmen.io"
   },
   "container_repo": {
     "host": "kube-registry.kube-system.svc.cluster.local:31000",
